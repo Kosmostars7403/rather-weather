@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {WeatherService} from "src/app/shared/services/weather.service";
 
 @Component({
@@ -7,18 +7,22 @@ import {WeatherService} from "src/app/shared/services/weather.service";
   styleUrls: ['./main-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MainPageComponent implements OnInit {
+export class MainPageComponent {
   currentWeather$ = this.weatherService.fetchCurrentWeather()
 
   constructor(private weatherService: WeatherService) { }
 
-  ngOnInit(): void {
+  getMyCoords() {
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        console.log(position);
+        this.weatherService.userLocation$.next({
+          lat: position.coords.latitude,
+          lon: position.coords.longitude,
+        })
       },
       (error) => {
-          if(error.PERMISSION_DENIED) {
+        if(error.PERMISSION_DENIED) {
+          console.error("You don't give us access! How dare you?")
         }
       });
   }

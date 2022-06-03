@@ -1,8 +1,10 @@
+export interface Coords {
+  "lon": number,
+  "lat": number
+}
+
 export interface CurrentDay {
-  "coord": {
-    "lon": number,
-    "lat": number
-  },
+  "coord": Coords,
   "weather": [
     {
       "id": number,
