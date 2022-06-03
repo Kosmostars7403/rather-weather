@@ -1,0 +1,9 @@
+<header class="header">
+  <button (click)="getMyCoords()">Get my coords</button>
+  <a [routerLink]="['/n']">Main</a>
+  <a [routerLink]="['/next-days']">Upcoming days</a>
+</header>
+
+<div class="container">
+  <ng-content></ng-content>
+</div>

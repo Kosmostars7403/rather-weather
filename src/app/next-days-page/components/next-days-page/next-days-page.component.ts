@@ -1,4 +1,5 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {WeatherService} from "src/app/shared/services/weather.service";
 
 @Component({
   selector: 'app-next-days-page',
@@ -6,11 +7,9 @@ import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
   styleUrls: ['./next-days-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NextDaysPageComponent implements OnInit {
+export class NextDaysPageComponent {
+  upcomingWeather$ = this.weatherService.fetchUpcomingWeather()
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+  constructor(private weatherService: WeatherService) {}
 
 }
