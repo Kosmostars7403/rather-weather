@@ -1,4 +1,5 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {WeatherService} from "src/app/shared/services/weather.service";
 
 @Component({
   selector: 'app-main-page',
@@ -7,10 +8,19 @@ import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MainPageComponent implements OnInit {
+  currentWeather$ = this.weatherService.fetchCurrentWeather()
 
-  constructor() { }
+  constructor(private weatherService: WeatherService) { }
 
   ngOnInit(): void {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        console.log(position);
+      },
+      (error) => {
+          if(error.PERMISSION_DENIED) {
+        }
+      });
   }
 
 }
