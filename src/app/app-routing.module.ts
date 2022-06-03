@@ -7,7 +7,7 @@ const routes: Routes = [
     loadChildren: () => import('./main-page/main-page.module').then(x => x.MainPageModule)
   },
   {
-    path: ':period',
+    path: 'next-days',
     loadChildren: () => import('./next-days-page/next-days-page.module').then(x => x.NextDaysPageModule)
   },
 ];

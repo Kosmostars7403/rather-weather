@@ -2,7 +2,9 @@ import {Inject, Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {API_URL} from "src/app/shared/providers/api-url.provider";
 import {Coords, CurrentDay} from "src/app/shared/models/current-day";
-import {BehaviorSubject, Observable, switchMap} from "rxjs";
+import {BehaviorSubject, map, Observable, switchMap} from "rxjs";
+import {UpcomingDaysResponse} from "src/app/shared/models/upcoming-days";
+
 
 @Injectable({
   providedIn: 'root'
@@ -21,17 +23,28 @@ export class WeatherService {
   ) {
   }
 
-  fetchCurrentWeather(): Observable<CurrentDay> {
+  baseOnUserLocation<T>(fetchFn: (coords: Coords) => Observable<T>) {
     return this.userLocation$.pipe(
-      switchMap(coords => {
-        if (!coords) coords = this.defaultCoords
+      map(coords => coords ? coords : this.defaultCoords),
+      switchMap(coords => fetchFn(coords)))
+  }
 
-        return this.http.get<CurrentDay>(
-          `${this.apiUrl}weather`,
-          { params: {...coords}}
-          )
-      })
-    )
+  fetchCurrentWeather(): Observable<CurrentDay> {
+    return this.baseOnUserLocation<CurrentDay>((coords) => {
+      return this.http.get<CurrentDay>(
+        `${this.apiUrl}weather`,
+        {params: {...coords}}
+      )
+    })
+  }
+
+  fetchUpcomingWeather(): Observable<UpcomingDaysResponse> {
+    return this.baseOnUserLocation<UpcomingDaysResponse>((coords) => {
+      return this.http.get<UpcomingDaysResponse>(
+        `${this.apiUrl}forecast`,
+        {params: {...coords}}
+      )
+    })
   }
 
 }
