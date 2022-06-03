@@ -1,7 +1,26 @@
-<header class="header">
-  <button (click)="getMyCoords()">Get my coords</button>
-  <a [routerLink]="['/n']">Main</a>
-  <a [routerLink]="['/next-days']">Upcoming days</a>
+<header class="header container">
+  <h1 class="logo">RatherWeather</h1>
+
+  <div class="right-side">
+    <a
+      [routerLink]="['/']"
+      class="body-1 link"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{exact: true}"
+    >Main</a>
+
+    <a
+      [routerLink]="['/next-days']"
+      class="body-1 link"
+      routerLinkActive="active"
+    >Upcoming days</a>
+
+    <button
+      (click)="getMyCoords()"
+      class="location-btn"
+    >Get my coords</button>
+  </div>
+
 </header>
 
 <div class="container">

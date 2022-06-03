@@ -1,0 +1,40 @@
+:root {
+  --primary-color: #5D2C60;
+  --dark-primary-color: #420D45;
+  --font-color: #F2FBFF;
+  --right-to-left-gradient: linear-gradient(252.44deg, var(--primary-color) 0%, white 100%);
+  --left-to-right-gradient: linear-gradient(252.44deg, white 0%, var(--primary-color) 100%);
+}
+
+@font-face {
+  font-family: 'Rubik';
+  font-style: normal;
+  font-weight: 400;
+  src: local(''),
+  url('/assets/fonts/rubik-v20-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+  url('/assets/fonts/rubik-v20-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Rubik', sans-serif;
+  background: var(--dark-primary-color);
+}
+
+.container {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.body-1 {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 28px;
+  color: var(--font-color);
+}

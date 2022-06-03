@@ -1,0 +1,47 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  margin-top: 32px;
+  margin-bottom: 32px;
+  background: var(--right-to-left-gradient);
+  border-radius: 32px;
+  padding: 0 32px;
+
+  .logo {
+  }
+
+  .right-side {
+    display: grid;
+    grid-template-columns: repeat(2, max-content) 200px;
+    grid-gap: 32px;
+    align-items: center;
+
+    .link {
+      text-decoration: none;
+
+      &.active,
+      &:hover {
+        color: var(--primary-color);
+      }
+    }
+  }
+
+  .location-btn {
+    border: none;
+    background: var(--left-to-right-gradient);
+    color: var(--font-color);
+    height: 48px;
+    width: 200px;
+    border-radius: 18px;
+    font-size: 18px;
+    cursor: pointer;
+
+    &:hover {
+      filter: blur(1px);
+    }
+  }
+}
+
+
