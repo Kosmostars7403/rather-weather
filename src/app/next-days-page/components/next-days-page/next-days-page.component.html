@@ -1,3 +1,14 @@
-<pre>
-  {{ upcomingWeather$ | async | json }}
-</pre>
+<ng-container *ngIf="upcomingWeather$ | async as hourlyWeathers; else loading">
+  <h1 class="title">Weather at {{ hourlyWeathers.city.name }}</h1>
+  <app-day-card
+    *ngFor="let dayWeather of hourlyWeathers.list"
+    [dayWeather]="dayWeather"
+  ></app-day-card>
+</ng-container>
+
+<ng-template #loading>
+  <div class="skeleton-container title-skeleton"></div>
+  <div class="skeleton-container one-day-skeleton"></div>
+  <div class="skeleton-container one-day-skeleton"></div>
+  <div class="skeleton-container one-day-skeleton"></div>
+</ng-template>

@@ -2,8 +2,12 @@ import {Inject, Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {API_URL} from "src/app/shared/providers/api-url.provider";
 import {Coords, CurrentDay} from "src/app/shared/models/current-day";
-import {BehaviorSubject, map, Observable, of, switchMap, tap} from "rxjs";
-import {UpcomingDaysResponse} from "src/app/shared/models/upcoming-days";
+import {BehaviorSubject, map, Observable, of, switchMap} from "rxjs";
+import {
+  HourlyWeather,
+  HourlyWeathersGroupedResponse,
+  HourlyWeathersResponse
+} from "src/app/shared/models/upcoming-days";
 import {CacheRequest} from "src/app/shared/decorators/cache-request.decorator";
 
 
@@ -34,6 +38,12 @@ export class WeatherService {
           lat: position.coords.latitude,
           lon: position.coords.longitude,
         })
+
+        localStorage.setItem('userLocation', JSON.stringify({
+          lat: position.coords.latitude,
+          lon: position.coords.longitude,
+        }))
+
         this.loadingGeo$.next(false)
       },
       (error) => {
@@ -48,6 +58,12 @@ export class WeatherService {
     return this.loadingGeo$.pipe(
       switchMap((isLoading) => {
         if (isLoading) return of(null)
+
+        const savedLocation = localStorage.getItem('userLocation')
+
+        if (savedLocation) {
+          return fetchFn(JSON.parse(savedLocation))
+        }
 
         return this.userLocation$.pipe(
           map(coords => coords ? coords : this.defaultCoords),
@@ -66,13 +82,33 @@ export class WeatherService {
   }
 
   @CacheRequest('four-days')
-  fetchUpcomingWeather(): Observable<UpcomingDaysResponse | null> {
-    return this.baseOnUserLocation<UpcomingDaysResponse>((coords) => {
-      return this.http.get<UpcomingDaysResponse>(
+  fetchUpcomingWeather(): Observable<HourlyWeathersGroupedResponse | null> {
+    return this.baseOnUserLocation<HourlyWeathersGroupedResponse>((coords) => {
+      return this.http.get<HourlyWeathersResponse>(
         `${this.apiUrl}forecast`,
         {params: {...coords}}
+      ).pipe(
+        map(res => {
+          const list: HourlyWeather[][] = []
+          const byDays: {[key: string]: HourlyWeather[]} = {}
+
+          res?.list.forEach((hourly: HourlyWeather) => {
+            const dayOfMonth = new Date(hourly.dt * 1000).getDate().toString()
+            if (!(dayOfMonth in byDays)) byDays[dayOfMonth] = []
+            byDays[dayOfMonth].push(hourly)
+          })
+
+          Object.keys(byDays).forEach((key, index) => {
+            if (index > 3) return
+            list.push(byDays[key])
+          })
+
+          return {
+            ...res,
+            list
+          }
+        })
       )
     })
   }
-
 }

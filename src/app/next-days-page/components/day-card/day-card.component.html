@@ -1,0 +1,47 @@
+<article class="day-weather">
+  <p class="body-1 card-title">{{ dayWeather[0].dt * 1000 | date: 'dd MMM' }}</p>
+
+  <div class="table-expander" [class.expanded]="expanded">
+
+    <table class="day-weather-table body-1">
+      <thead>
+      <tr>
+        <td class="time"></td>
+        <td class="icon"></td>
+        <td class="description-head"></td>
+        <td class="">Pressure</td>
+        <td class="">Humidity</td>
+        <td class="">Wind Speed</td>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let hourlyWeather of dayWeather" class="table-row">
+        <td>
+          <div>{{ hourlyWeather.dt * 1000 | date:"HH:mm"}}</div>
+          <div>{{ hourlyWeather.main.temp_min | temp }}...{{ hourlyWeather.main.temp_max | temp }}°C</div>
+        </td>
+        <td>
+          <img
+            [src]="'http://openweathermap.org/img/wn/' + hourlyWeather.weather[0].icon + '@2x.png'"
+            alt="weather icon"
+          />
+        </td>
+        <td class="body-1 description">
+          <div>{{ hourlyWeather.weather[0].description }}</div>
+          <div>Feels like {{ hourlyWeather.main.feels_like }}</div>
+        </td>
+        <td>{{ hourlyWeather.main.pressure }}</td>
+        <td>{{ hourlyWeather.main.humidity }}%</td>
+        <td>{{ hourlyWeather.wind.speed }} m/s</td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+  <div class="btn-wrapper">
+    <button
+      class="more-btn" (click)="expanded=!expanded"
+    >{{ expanded ? 'Less..' : 'More...' }}</button>
+  </div>
+</article>

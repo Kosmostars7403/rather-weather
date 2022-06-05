@@ -1,6 +1,6 @@
 import {Coords} from "src/app/shared/models/current-day";
 
-export interface UpcomingDay {
+export interface HourlyWeather {
   dt: number,
   main: {
     temp: number,
@@ -37,11 +37,11 @@ export interface UpcomingDay {
   dt_txt: string
 }
 
-export interface UpcomingDaysResponse {
+export interface HourlyWeathersResponse {
   cod: string,
   message: number,
   cnt: number,
-  list: UpcomingDay[],
+  list: HourlyWeather[],
   city: {
     id: number,
     name: string,
@@ -51,5 +51,9 @@ export interface UpcomingDaysResponse {
     timezone: number,
     sunrise: string,
     sunset: string
-  }
+  },
+}
+
+export interface HourlyWeathersGroupedResponse extends Omit<HourlyWeathersResponse, 'list'> {
+  list: HourlyWeather[][]
 }
