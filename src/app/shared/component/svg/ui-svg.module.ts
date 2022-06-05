@@ -8,7 +8,7 @@ import {SVG_ICONS_PATH} from "src/app/shared/component/svg/svg-icons-path";
   exports: [SvgIconComponent],
   providers: [{
     provide: SVG_ICONS_PATH,
-    useValue: "/assets/svg/shared.svg"
+    useValue: "assets/svg/shared.svg"
   }]
 })
 export class UiSvgModule { }
