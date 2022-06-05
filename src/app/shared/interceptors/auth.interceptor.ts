@@ -13,7 +13,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
   public intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
      const authRequest = request.clone({
-      params: request.params.set('appid', this.apiKey)
+      params: request.params.set('appid', this.apiKey).set('units', 'metric')
     })
 
     return next.handle(authRequest)

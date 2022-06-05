@@ -3,16 +3,16 @@ export interface Coords {
   "lat": number
 }
 
+export interface Weather {
+  "id": number,
+  "main": "Clouds" | "Rain",
+  "description": string,
+  "icon": string
+}
+
 export interface CurrentDay {
   "coord": Coords,
-  "weather": [
-    {
-      "id": number,
-      "main": "Clouds",
-      "description": string,
-      "icon": string
-    }
-  ],
+  "weather": Weather[],
   "base": "stations",
   "main": {
     "temp": number,

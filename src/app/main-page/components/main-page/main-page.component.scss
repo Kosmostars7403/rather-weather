@@ -1,0 +1,25 @@
+.current-weather {
+  padding: 64px;
+  border-radius: 32px;
+  background: linear-gradient(252.44deg, rgba(239, 255, 253, 0.7) 0%, rgba(239, 255, 253, 0) 100%);
+  backdrop-filter: blur(40px);
+}
+
+.temperature-wrapper {
+  display: flex;
+  gap: 24px;
+  align-items: flex-end;
+}
+
+.temperature-main {
+  font-size: 88px;
+  line-height: 72px;
+}
+
+$margin-sizes: (8, 24, 48);
+
+@each $i in $margin-sizes {
+  .mb#{$i} {
+    margin-bottom: #{$i}px;
+  }
+}

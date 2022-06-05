@@ -7,16 +7,18 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {API_URL} from "src/app/shared/providers/api-url.provider";
 import {API_KEY} from "src/app/shared/providers/api-key.provider";
 import {AuthInterceptor} from "src/app/shared/interceptors/auth.interceptor";
+import {LayoutModule} from "src/app/shared/component/layout/layout.module";
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    LayoutModule
   ],
   providers: [
     {
@@ -25,7 +27,7 @@ import {AuthInterceptor} from "src/app/shared/interceptors/auth.interceptor";
     },
     {
       provide: API_KEY,
-      useValue: ''
+      useValue: 'ae7dc486a89d4870e3aea23f5704ecb4'
     },
     {
       provide: HTTP_INTERCEPTORS,

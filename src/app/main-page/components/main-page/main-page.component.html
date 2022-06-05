@@ -1,3 +1,13 @@
-<pre>
-  {{ currentWeather$ | async | json}}
-</pre>
+<main class="current-weather" *ngIf="currentWeather$ | async as currentWeather">
+  <p class="body-1 mb8">{{ currentWeather.name }}</p>
+  <p class="body-1 mb24">{{ currentWeather.dt * 1000 | date : 'HH:mm:SS MMM, dd YYYY' }}</p>
+  <p class="body-1 mb8">{{ currentWeather.weather[0].main }}</p>
+
+  <div class="temperature-wrapper mb48">
+    <p class="body-1 temperature-main">{{ currentWeather.main.temp | temp }}</p>
+    <p class="body-1">Feels like {{ currentWeather.main.feels_like | temp }}°C</p>
+  </div>
+
+
+  <pre>{{ currentWeather | json}}</pre>
+</main>

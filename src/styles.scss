@@ -2,8 +2,8 @@
   --primary-color: #5D2C60;
   --dark-primary-color: #420D45;
   --font-color: #F2FBFF;
-  --right-to-left-gradient: linear-gradient(252.44deg, var(--primary-color) 0%, white 100%);
-  --left-to-right-gradient: linear-gradient(252.44deg, white 0%, var(--primary-color) 100%);
+  --left-to-left-gradient: linear-gradient(252.44deg, rgba(239, 255, 253, 0.7) 0%, rgba(239, 255, 253, 0) 100%);
+  --right-to-left-gradient: linear-gradient(252.44deg, rgba(239, 255, 253, 0) 0%, rgba(239, 255, 253, 0.7) 100%);
 }
 
 @font-face {

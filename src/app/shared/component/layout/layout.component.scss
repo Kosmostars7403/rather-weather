@@ -41,16 +41,17 @@
 
   .location-btn {
     border: none;
-    background: var(--left-to-right-gradient);
+    background: linear-gradient(269.42deg, #F2FBFF -1.71%, rgba(242, 251, 255, 0.3) 100%);
     color: var(--font-color);
     height: 48px;
     width: 200px;
     border-radius: 18px;
     font-size: 18px;
     cursor: pointer;
+    opacity: 0.7;
 
     &:hover {
-      filter: blur(1px);
+      opacity: 0.9;
     }
   }
 }
