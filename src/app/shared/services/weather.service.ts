@@ -2,11 +2,9 @@ import {Inject, Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {API_URL} from "src/app/shared/providers/api-url.provider";
 import {Coords, CurrentDay} from "src/app/shared/models/current-day";
-import {BehaviorSubject, delay, filter, map, Observable, of, startWith, Subject, switchMap, tap} from "rxjs";
+import {BehaviorSubject, map, Observable, of, switchMap, tap} from "rxjs";
 import {UpcomingDaysResponse} from "src/app/shared/models/upcoming-days";
-import {
-  logExperimentalWarnings
-} from "@angular-devkit/build-angular/src/builders/browser-esbuild/experimental-warnings";
+import {CacheRequest} from "src/app/shared/decorators/cache-request.decorator";
 
 
 @Injectable({
@@ -67,6 +65,7 @@ export class WeatherService {
     })
   }
 
+  @CacheRequest('four-days')
   fetchUpcomingWeather(): Observable<UpcomingDaysResponse | null> {
     return this.baseOnUserLocation<UpcomingDaysResponse>((coords) => {
       return this.http.get<UpcomingDaysResponse>(
