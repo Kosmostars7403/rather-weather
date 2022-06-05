@@ -8,6 +8,12 @@
     <p class="body-1">Feels like {{ currentWeather.main.feels_like | temp }}°C</p>
   </div>
 
+  <ul class="other-parameters">
+    <li class="body-1">Humidity: {{ currentWeather.main.humidity }}%</li>
+    <li class="body-1">Wind speed: {{ currentWeather.wind.speed }}m/s</li>
+    <li class="body-1">Pressure: {{ currentWeather.main.pressure }}</li>
+    <li class="body-1">Visibility: {{ currentWeather.visibility / 1000 }}km</li>
+  </ul>
 
-  <pre>{{ currentWeather | json}}</pre>
+<!--  <pre>{{ currentWeather | json}}</pre>-->
 </main>

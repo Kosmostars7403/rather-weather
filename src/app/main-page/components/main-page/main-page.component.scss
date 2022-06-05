@@ -16,6 +16,13 @@
   line-height: 72px;
 }
 
+.other-parameters {
+  list-style: none;
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: 32px;
+}
+
 $margin-sizes: (8, 24, 48);
 
 @each $i in $margin-sizes {
