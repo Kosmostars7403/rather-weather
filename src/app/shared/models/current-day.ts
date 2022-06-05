@@ -5,7 +5,7 @@ export interface Coords {
 
 export interface Weather {
   "id": number,
-  "main": "Clouds" | "Rain",
+  "main": "Clouds" | "Rain" | "Thunderstorm" | "Drizzle" | "Snow" | "Atmosphere" | "Clear",
   "description": string,
   "icon": string
 }

@@ -1,6 +1,6 @@
 <main class="current-weather" *ngIf="currentWeather$ | async as currentWeather">
   <p class="body-1 mb8">{{ currentWeather.name }}</p>
-  <p class="body-1 mb24">{{ currentWeather.dt * 1000 | date : 'HH:mm:SS MMM, dd YYYY' }}</p>
+  <p class="body-1 mb24">{{ currentWeather.dt * 1000 | date : 'HH:mm  MMM, dd YYYY' }}</p>
   <p class="body-1 mb8">{{ currentWeather.weather[0].main }}</p>
 
   <div class="temperature-wrapper mb48">
@@ -15,5 +15,10 @@
     <li class="body-1">Visibility: {{ currentWeather.visibility / 1000 }}km</li>
   </ul>
 
-<!--  <pre>{{ currentWeather | json}}</pre>-->
+  <img
+    [src]="'http://openweathermap.org/img/wn/' + currentWeather.weather[0].icon + '@2x.png'"
+    alt="weather icon"
+    class="weather-icon"
+  />
+
 </main>
