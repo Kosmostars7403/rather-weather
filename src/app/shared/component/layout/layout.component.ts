@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {WeatherService} from "src/app/shared/services/weather.service";
+import {SvgIconNames} from "src/app/shared/component/svg/svg-icon-names";
 
 @Component({
   selector: 'app-layout',
@@ -8,6 +9,7 @@ import {WeatherService} from "src/app/shared/services/weather.service";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LayoutComponent {
+  icons = SvgIconNames
 
   constructor(private weatherService: WeatherService) { }
 

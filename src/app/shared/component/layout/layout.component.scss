@@ -10,6 +10,17 @@
   padding: 0 32px;
 
   .logo {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    .logo-text {
+      background: linear-gradient(0, var(--font-color) 0%, var(--primary-color) 100%);;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+    }
   }
 
   .right-side {
