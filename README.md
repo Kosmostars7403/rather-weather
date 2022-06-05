@@ -1,27 +1,23 @@
 # RatherWeather
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.0.
+There is [DEMO-SITE](https://kosmostars7403.github.io/rather-weather/)
 
-## Development server
+Take your weather forecast! This project is solution for tech task for interview.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Setup
+Create an `.env` file in a root folder of project and fill it in like this:
+```
+API_KEY={YOUR API KEY FROM https://openweathermap.org/}
+```
 
-## Code scaffolding
+then install dependencies with `npm install` and start project with `npm run start`. 
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Enjoy)
 
-## Build
+## P.S.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+I didn't know when to stop in this project) I could put NGRX here and other commonly used libraries.
+I slightly overengineered application to show you that I know things)
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## P.P.S.
+I'm not a big fan of css nesting, but I know how it works.
