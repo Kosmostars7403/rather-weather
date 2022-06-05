@@ -30,6 +30,33 @@ export class WeatherService {
   ) {
   }
 
+  private groupHoursByDay(list: HourlyWeather[]) {
+    const resultLIst: HourlyWeather[][] = []
+
+    let currentDate = -1
+    let dayHourlies: HourlyWeather[] = []
+
+    for (let i = 0; i < list.length; i++) {
+      const dayOfMonth = new Date(list[i].dt * 1000).getDate()
+
+      if (i === 0) {
+        currentDate = dayOfMonth
+        continue
+      }
+
+      if (currentDate === dayOfMonth) {
+        dayHourlies.push(list[i])
+      } else {
+        resultLIst.push(dayHourlies)
+        dayHourlies = []
+        currentDate = dayOfMonth
+      }
+    }
+
+    return resultLIst
+  }
+
+
   getMyCoords() {
     this.loadingGeo$.next(true)
     navigator.geolocation.getCurrentPosition(
@@ -47,14 +74,14 @@ export class WeatherService {
         this.loadingGeo$.next(false)
       },
       (error) => {
-        if(error.PERMISSION_DENIED) {
+        if (error.PERMISSION_DENIED) {
           console.error("You don't give us access! How dare you?")
           this.loadingGeo$.next(false)
         }
       });
   }
 
-  baseOnUserLocation<T>(fetchFn: (coords: Coords) => Observable<T>) {
+  private baseOnUserLocation<T>(fetchFn: (coords: Coords) => Observable<T>) {
     return this.loadingGeo$.pipe(
       switchMap((isLoading) => {
         if (isLoading) return of(null)
@@ -88,26 +115,7 @@ export class WeatherService {
         `${this.apiUrl}forecast`,
         {params: {...coords}}
       ).pipe(
-        map(res => {
-          const list: HourlyWeather[][] = []
-          const byDays: {[key: string]: HourlyWeather[]} = {}
-
-          res?.list.forEach((hourly: HourlyWeather) => {
-            const dayOfMonth = new Date(hourly.dt * 1000).getDate().toString()
-            if (!(dayOfMonth in byDays)) byDays[dayOfMonth] = []
-            byDays[dayOfMonth].push(hourly)
-          })
-
-          Object.keys(byDays).forEach((key, index) => {
-            if (index > 3) return
-            list.push(byDays[key])
-          })
-
-          return {
-            ...res,
-            list
-          }
-        })
+        map(res => ({...res, list: this.groupHoursByDay(res.list)}))
       )
     })
   }
