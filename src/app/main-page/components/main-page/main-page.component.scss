@@ -31,6 +31,12 @@
   }
 }
 
+.main-page-skeleton {
+  height: 400px;
+  width: 100%;
+  border-radius: 32px;
+}
+
 $margin-sizes: (8, 24, 48);
 
 @each $i in $margin-sizes {

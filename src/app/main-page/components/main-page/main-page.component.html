@@ -1,4 +1,4 @@
-<main class="current-weather" *ngIf="currentWeather$ | async as currentWeather">
+<main class="current-weather" *ngIf="currentWeather$ | async as currentWeather; else loading">
   <p class="body-1 mb8">{{ currentWeather.name }}</p>
   <p class="body-1 mb24">{{ currentWeather.dt * 1000 | date : 'HH:mm  MMM, dd YYYY' }}</p>
   <p class="body-1 mb8">{{ currentWeather.weather[0].main }}</p>
@@ -20,5 +20,8 @@
     alt="weather icon"
     class="weather-icon"
   />
-
 </main>
+
+<ng-template #loading>
+  <div class="main-page-skeleton skeleton-container"></div>
+</ng-template>

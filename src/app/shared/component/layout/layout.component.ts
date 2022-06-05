@@ -14,18 +14,7 @@ export class LayoutComponent {
   constructor(private weatherService: WeatherService) { }
 
   getMyCoords() {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        this.weatherService.userLocation$.next({
-          lat: position.coords.latitude,
-          lon: position.coords.longitude,
-        })
-      },
-      (error) => {
-        if(error.PERMISSION_DENIED) {
-          console.error("You don't give us access! How dare you?")
-        }
-      });
+    this.weatherService.getMyCoords()
   }
 
 }
